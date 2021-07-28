@@ -36,6 +36,7 @@ const TodosCard = ({ type, ...props }) => {
 
   const launchNewTodoModal = () => {
     const id = sheet.todos[type] ? sheet.todos[type]._id : null;
+    console.log("aa: ", id);
     handleOpen((todoItem) => {
       handleCreateTodoItem({
         id,
@@ -46,6 +47,7 @@ const TodosCard = ({ type, ...props }) => {
   };
 
   const launchEditTodoModal = (selectedTodoItem) => {
+    console.log("dod", selectedTodoItem);
     handleOpen(
       (todoItem) => {
         handleUpdateTodoItem({ ...todoItem, id: selectedTodoItem._id });
@@ -72,10 +74,9 @@ const TodosCard = ({ type, ...props }) => {
   const hasItems = sheet.todos[type]._id && items.length;
   const startTimeVisibility = hasItems && props.startTime;
   const endTimeVisibility =
-  startTimeVisibility && sheet.todos[type].startTime && props.endTime;
-  
-  return (
+    startTimeVisibility && sheet.todos[type].startTime && props.endTime;
 
+  return (
     <Card
       title={props.title}
       sectionName={props.sectionName}

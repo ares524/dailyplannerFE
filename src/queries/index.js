@@ -130,6 +130,32 @@ export const sheetQueryStr = `
   }
 `;
 
+export const journalQueryStr = `
+  query JournalQuery($id: ID) {
+    journal(id: $id) {
+      _id
+      userId
+      thoughts {
+        today {
+          _id
+          items {
+            _id
+            title
+            completed
+            actions {
+              _id
+              text
+              completed
+            }
+          }
+          startTime
+          endTime
+        }
+      }
+    }
+  }
+`;
+
 export const expensesQuery = gql`
   query {
     expenses {
@@ -137,6 +163,46 @@ export const expensesQuery = gql`
       type
       description
       amount
+    }
+  }
+`;
+
+export const journalsQuery = gql`
+  query {
+    journals {
+      _id
+      items {
+        _id
+        title
+        completed
+        actions {
+          _id
+          text
+          completed
+        }
+      }
+      startTime
+      endTime
+    }
+  }
+`;
+
+export const journalsQueryStr = `
+  query {
+    journals {
+      _id
+      items {
+        _id
+        title
+        completed
+        actions {
+          _id
+          text
+          completed
+        }
+      }
+      startTime
+      endTime
     }
   }
 `;

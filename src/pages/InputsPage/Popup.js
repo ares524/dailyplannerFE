@@ -13,6 +13,7 @@ import ResearchCard from "./ResearchCard";
 import AccountabilityCard from "./AccountabilityCard";
 import AffirmationCard from "./AffirmationCard";
 import CallSosCard from "./CallSos";
+import TodaysTodoCards from "../JournalPage/MenuCard";
 
 const Popup = (props) => {
   const { editMode, sectionName, handleDismiss } = useEditMode();
@@ -35,6 +36,8 @@ const Popup = (props) => {
         return <AsleepCard />;
       case "TODAYS_TODOS":
         return <TodaysTodoCard />;
+      case "TODAYS_THOUGHT":
+        return <TodaysTodoCards />;
       case "WORK_TODOS":
         return <WorkTodosCard />;
       case "ART_TODOS":

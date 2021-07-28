@@ -67,6 +67,14 @@ export const updateSheetMutation = gql`
   }
 `;
 
+export const updateJournalMutation = gql`
+  mutation ($id: ID!) {
+    updateSheet(id: $id) {
+      id
+    }
+  }
+`;
+
 export const createTodoItemMutation = gql`
   mutation (
     $id: ID
@@ -156,6 +164,132 @@ export const deleteExpenseMutation = gql`
   mutation ($id: ID!) {
     deleteExpense(id: $id) {
       result
+    }
+  }
+`;
+
+// export const createThoughtItemMutation = gql`
+//   mutation (
+//     $id: ID
+//     $sheetId: ID!
+//     $type: String
+//     $title: String
+//     $actions: [ThoughtActionInputType]!
+//   ) {
+//     createThoughtItem(
+//       id: $id
+//       sheetId: $sheetId
+//       type: $type
+//       title: $title
+//       actions: $actions
+//     ) {
+//       _id
+//       sheetId
+//       items {
+//         _id
+//         title
+//         completed
+//       }
+//       type
+//       startTime
+//       endTime
+//     }
+//   }
+// `;
+
+// export const updateThoughtItemMutation = gql`
+//   mutation ($id: ID!, $title: String!, $actions: [ThoughtActionInputType]!) {
+//     updateThoughtItem(id: $id, title: $title, actions: $actions) {
+//       _id
+//       title
+//       completed
+//     }
+//   }
+// `;
+
+// export const toggleThoughtItemCompletedMutation = gql`
+//   mutation ($id: ID!) {
+//     toggleThoughtItemCompleted(id: $id) {
+//       result
+//     }
+//   }
+// `;
+
+// export const deleteThoughtItemMutation = gql`
+//   mutation ($id: ID!) {
+//     deleteThoughtItem(id: $id) {
+//       result
+//     }
+//   }
+// `;
+
+// export const updateThoughtOptionsMutation = gql`
+//   mutation ($id: ID!, $startTime: String, $endTime: String) {
+//     updateThoughtOptions(id: $id, startTime: $startTime, endTime: $endTime) {
+//       _id
+//     }
+//   }
+// `;
+
+export const createThoughtItemMutation = gql`
+  mutation (
+    $id: ID
+    $type: String
+    $title: String
+    $actions: [ThoughtActionInputType]!
+  ) {
+    createThoughtItem(id: $id, type: $type, title: $title, actions: $actions) {
+      _id
+      items {
+        _id
+        title
+        completed
+      }
+      type
+      startTime
+      endTime
+    }
+  }
+`;
+
+export const updateThoughtItemMutation = gql`
+  mutation ($id: ID!, $title: String!, $actions: [ThoughtActionInputType]!) {
+    updateThoughtItem(id: $id, title: $title, actions: $actions) {
+      _id
+      title
+      completed
+    }
+  }
+`;
+
+export const toggleThoughtItemCompletedMutation = gql`
+  mutation ($id: ID!) {
+    toggleThoughtItemCompleted(id: $id) {
+      result
+    }
+  }
+`;
+
+export const deleteThoughtItemMutation = gql`
+  mutation ($id: ID!) {
+    deleteThoughtItem(id: $id) {
+      result
+    }
+  }
+`;
+
+export const updateThoughtOptionsMutation = gql`
+  mutation ($id: ID!, $startTime: String, $endTime: String) {
+    updateThoughtOptions(id: $id, startTime: $startTime, endTime: $endTime) {
+      _id
+    }
+  }
+`;
+
+export const getAllThoughtsMutation = gql`
+  mutation ($id: ID!) {
+    getAllThoughts(id: $id) {
+      _id
     }
   }
 `;

@@ -13,6 +13,7 @@
     "apollo-boost": "^0.4.9",
     "framer-motion": "^4.1.17",
     "graphql": "^15.5.1",
+    "omit-deep": "^0.3.0",
     "react": "^17.0.2",
     "react-apollo": "^3.1.5",
     "react-dom": "^17.0.2",

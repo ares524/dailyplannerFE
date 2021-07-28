@@ -1,8 +1,8 @@
-import TodosCard from "../../components/TodosCard/TodosCard";
+import ThoughtsCard from "../../components/ThoughtsCard/ThoughtsCard";
 
 const MenuCard = (props) => {
   return (
-    <TodosCard title="today's todo" sectionName="TODAYS_TODOS" type="today" />
+    <ThoughtsCard title="ADD A THOUGHT" sectionName="TODAYS_THOUGHT" type="today" />
   );
 };
 

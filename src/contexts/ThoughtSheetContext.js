@@ -1,12 +1,12 @@
 import { createContext, useCallback, useContext, useReducer } from "react";
 import { useMutation } from "react-apollo";
 import {
-  createTodoItemMutation,
-  deleteTodoItemMutation,
-  toggleTodoItemCompletedMutation,
+  createThoughtItemMutation,
+  deleteThoughtItemMutation,
+  toggleThoughtItemCompletedMutation,
   updateSheetMutation,
-  updateTodoItemMutation,
-  updateTodoOptionsMutation,
+  updateThoughtItemMutation,
+  updateThoughtOptionsMutation,
 } from "../mutations";
 import { sheetQueryStr } from "../queries";
 import { get } from "../util/api";
@@ -18,11 +18,11 @@ function sheetReducer(state, action) {
     case "RECEIVE_SHEET":
       return {
         ...action.sheet,
-        todos: {
-          today: action.sheet.todos.today || { items: [] },
-          tomorrow: action.sheet.todos.tomorrow || { items: [] },
-          work: action.sheet.todos.work || { items: [] },
-          art: action.sheet.todos.art || { items: [] },
+        thoughts: {
+          today: action.sheet.thoughts.today || { items: [] },
+          tomorrow: action.sheet.thoughts.tomorrow || { items: [] },
+          work: action.sheet.thoughts.work || { items: [] },
+          art: action.sheet.thoughts.art || { items: [] },
         },
       };
     case "UPDATE_SHEET":
@@ -36,7 +36,7 @@ export const SheetProvider = (props) => {
   const [sheet, dispatch] = useReducer(sheetReducer, {
     reading: {},
     accountability: {},
-    todos: {
+    thoughts: {
       today: {
         items: [],
       },
@@ -58,14 +58,15 @@ export const SheetProvider = (props) => {
 
 export function useSheet() {
   const context = useContext(SheetContext);
+  console.log(context);
   if (!context) throw new Error("Please use useSheet within SheetProvider");
   const [updateSheet] = useMutation(updateSheetMutation);
-  const [createTodoItem] = useMutation(createTodoItemMutation);
-  const [updateTodoItem] = useMutation(updateTodoItemMutation);
-  const [deleteTodoItem] = useMutation(deleteTodoItemMutation);
-  const [updateTodoOptions] = useMutation(updateTodoOptionsMutation);
-  const [toggleTodoItemCompleted] = useMutation(
-    toggleTodoItemCompletedMutation
+  const [createThoughtItem] = useMutation(createThoughtItemMutation);
+  const [updateThoughtItem] = useMutation(updateThoughtItemMutation);
+  const [deleteThoughtItem] = useMutation(deleteThoughtItemMutation);
+  const [updateThoughtOptions] = useMutation(updateThoughtOptionsMutation);
+  const [toggleThoughtItemCompleted] = useMutation(
+    toggleThoughtItemCompletedMutation
   );
   const { sheet, dispatch } = context;
 
@@ -101,18 +102,18 @@ export function useSheet() {
     }
   };
 
-  const handleCreateTodoItem = async ({ id, type, ...todoItem }) => {
+  const handleCreateThoughtItem = async ({ id, type, ...thoughtItem }) => {
     try {
-      console.log(sheet);
-      const result = await createTodoItem({
+      // console.log('aa: ', sheet);
+      const result = await createThoughtItem({
         variables: {
           id,
           sheetId: sheet._id,
           type,
-          ...todoItem,
+          ...thoughtItem,
         },
       });
-      if (result.data.createTodoItem._id) {
+      if (result.data.createThoughtItem._id) {
         handleGetSheet(sheet._id);
       }
     } catch (e) {
@@ -120,14 +121,14 @@ export function useSheet() {
     }
   };
 
-  const handleUpdateTodoItem = async (todoItem) => {
+  const handleUpdateThoughtItem = async (thoughtItem) => {
     try {
-      const result = await updateTodoItem({
+      const result = await updateThoughtItem({
         variables: {
-          ...todoItem,
+          ...thoughtItem,
         },
       });
-      if (result.data.updateTodoItem._id) {
+      if (result.data.updateThoughtItem._id) {
         handleGetSheet(sheet._id);
       }
     } catch (e) {
@@ -135,14 +136,14 @@ export function useSheet() {
     }
   };
 
-  const handleDeleteTodoItem = async (id) => {
+  const handleDeleteThoughtItem = async (id) => {
     try {
-      const result = await deleteTodoItem({
+      const result = await deleteThoughtItem({
         variables: {
           id,
         },
       });
-      if (result.data.deleteTodoItem.result) {
+      if (result.data.deleteThoughtItem.result) {
         handleGetSheet(sheet._id);
       }
     } catch (e) {
@@ -150,15 +151,15 @@ export function useSheet() {
     }
   };
 
-  const handleUpdateTodoOptions = async ({ id, ...options }) => {
+  const handleUpdateThoughtOptions = async ({ id, ...options }) => {
     try {
-      const result = await updateTodoOptions({
+      const result = await updateThoughtOptions({
         variables: {
           id,
           ...options,
         },
       });
-      if (result.data.updateTodoOptions._id) {
+      if (result.data.updateThoughtOptions._id) {
         handleGetSheet(sheet._id);
       }
     } catch (e) {
@@ -166,14 +167,14 @@ export function useSheet() {
     }
   };
 
-  const handleToggleTodoItemCompleted = async (id) => {
+  const handleToggleThoughtItemCompleted = async (id) => {
     try {
-      const result = await toggleTodoItemCompleted({
+      const result = await toggleThoughtItemCompleted({
         variables: {
           id,
         },
       });
-      if (result.data.toggleTodoItemCompleted.result) {
+      if (result.data.toggleThoughtItemCompleted.result) {
         handleGetSheet(sheet._id);
       }
     } catch (e) {
@@ -185,10 +186,10 @@ export function useSheet() {
     sheet,
     handleGetSheet,
     handleUpdateSheet,
-    handleCreateTodoItem,
-    handleUpdateTodoItem,
-    handleDeleteTodoItem,
-    handleUpdateTodoOptions,
-    handleToggleTodoItemCompleted,
+    handleCreateThoughtItem,
+    handleUpdateThoughtItem,
+    handleDeleteThoughtItem,
+    handleUpdateThoughtOptions,
+    handleToggleThoughtItemCompleted,
   };
 }

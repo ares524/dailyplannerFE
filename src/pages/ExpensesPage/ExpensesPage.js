@@ -49,6 +49,7 @@ const ExpensesPage = () => {
 
   useEffect(() => {
     if (data) {
+      console.log(data);
       setExpenses(data.expenses || []);
     }
   }, [data]);
