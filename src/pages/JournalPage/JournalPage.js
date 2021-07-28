@@ -1,14 +1,15 @@
-import { useUser } from "../../contexts/UserContext";
+import { useMutation } from "react-apollo";
 import Header from "../../components/Header/Header";
 import { Box, Flex } from "@chakra-ui/react";
 import ThoughtsCard from "./MenuCard";
 import { EditModeProvider } from "../../contexts/EditModeContext";
-import { SheetProvider, useSheet } from "../../contexts/ThoughtSheetContext";
+import { SheetProvider, useSheet } from "../../contexts/SheetContext";
 import Popup from "./Popup";
 import { ThoughtItemModalProvider } from "../../contexts/ThoughtItemModalContext";
 import ThoughtItemModal from "../../components/ThoughtItemModal/ThoughtItemModal";
 import { useEffect } from "react";
-import { useParams } from "react-router-dom";
+
+import { checkOrCreateSheetMutation } from "../../mutations";
 
 const JournalPage = (props) => {
   return (
@@ -23,8 +24,20 @@ const JournalPage = (props) => {
 };
 
 const Main = () => {
-  //   const params = useParams();
-  //   const { sheet, handleGetSheet } = useSheet();
+  const [checkOrCreateSheet] = useMutation(checkOrCreateSheetMutation);
+  const { sheet, handleGetSheet } = useSheet();
+  useEffect(() => {
+    const today = new Date();
+    checkOrCreateSheet({ variables: { day: today.toDateString() } })
+      .then((res) => {
+        if (res.data.checkOrCreateSheet.id) {
+          handleGetSheet(res.data.checkOrCreateSheet.id);
+        }
+      })
+      .catch(console.log);
+  }, [checkOrCreateSheet, handleGetSheet]);
+
+  if (!sheet) return <div>Loading...</div>;
   return (
     <>
       <Header />

@@ -51,7 +51,6 @@ export function useThoughtItemModal() {
     [dispatch]
   );
   const handleSubmit = (thoughtItem) => {
-    console.log(thoughtItem);
     thoughtItemModal.callback(thoughtItem);
     dispatch({ type: "DISMISS_THOUGHT_ITEM_MODAL" });
   };

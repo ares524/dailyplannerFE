@@ -36,7 +36,6 @@ const TodosCard = ({ type, ...props }) => {
 
   const launchNewTodoModal = () => {
     const id = sheet.todos[type] ? sheet.todos[type]._id : null;
-    console.log("aa: ", id);
     handleOpen((todoItem) => {
       handleCreateTodoItem({
         id,
@@ -47,7 +46,6 @@ const TodosCard = ({ type, ...props }) => {
   };
 
   const launchEditTodoModal = (selectedTodoItem) => {
-    console.log("dod", selectedTodoItem);
     handleOpen(
       (todoItem) => {
         handleUpdateTodoItem({ ...todoItem, id: selectedTodoItem._id });

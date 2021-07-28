@@ -102,8 +102,8 @@ export function useSheet() {
   };
 
   const handleCreateTodoItem = async ({ id, type, ...todoItem }) => {
+    console.log(sheet._id);
     try {
-      console.log(sheet);
       const result = await createTodoItem({
         variables: {
           id,

@@ -37,7 +37,6 @@ const ThoughtItemModal = (props) => {
   };
 
   const modalTitle = mode === "EDIT" ? "Edit Thought" : "Add New Thought";
-  console.log(actions);
   return (
     <Modal isOpen={isOpen} onClose={handleDismiss} size="4xl">
       <ModalOverlay />

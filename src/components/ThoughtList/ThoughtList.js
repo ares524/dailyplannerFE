@@ -1,5 +1,20 @@
-import { VStack, Text, Flex } from "@chakra-ui/react";
-import { CheckIcon, DeleteIcon, EditIcon } from "@chakra-ui/icons";
+import {
+  VStack,
+  Text,
+  Flex,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItemOption,
+  MenuOptionGroup,
+  IconButton,
+} from "@chakra-ui/react";
+import {
+  CheckIcon,
+  DeleteIcon,
+  EditIcon,
+  HamburgerIcon,
+} from "@chakra-ui/icons";
 import { useEditMode } from "../../contexts/EditModeContext";
 import { COLOR_THEME } from "../../util/constants";
 
@@ -8,6 +23,7 @@ function ThoughtList({
   handleDeleteItem,
   handleItemEdit,
   toggleCompleted,
+  handleAddToPlanner,
 }) {
   const { editMode } = useEditMode();
 
@@ -22,8 +38,6 @@ function ThoughtList({
           justifyContent="space-between"
           alignItems="center"
         >
-          {console.log(thought)}
-
           <CheckIcon
             mr="4"
             color={
@@ -63,8 +77,50 @@ function ThoughtList({
             fontSize="lg"
             color="red.500"
             cursor="pointer"
+            mr="4"
             display={editMode ? "inline-flex" : ["none", "inline-flex"]}
           />
+          <Menu>
+            <MenuButton
+              as={IconButton}
+              colorScheme="blue"
+              fontSize="sm"
+              mr="4"
+              aria-label="Options"
+              icon={<HamburgerIcon />}
+              variant="outline"
+            />
+            <MenuList minWidth="240px">
+              <MenuOptionGroup title="Category">
+                <MenuItemOption
+                  value="today"
+                  onClick={() => handleAddToPlanner({ thought, type: "today" })}
+                >
+                  Today
+                </MenuItemOption>
+                <MenuItemOption
+                  value="tomorrow"
+                  onClick={() =>
+                    handleAddToPlanner({ thought, type: "tomorrow" })
+                  }
+                >
+                  Tomorrow
+                </MenuItemOption>
+                <MenuItemOption
+                  value="work"
+                  onClick={() => handleAddToPlanner({ thought, type: "work" })}
+                >
+                  Work
+                </MenuItemOption>
+                <MenuItemOption
+                  value="art"
+                  onClick={() => handleAddToPlanner({ thought, type: "art" })}
+                >
+                  Art
+                </MenuItemOption>
+              </MenuOptionGroup>
+            </MenuList>
+          </Menu>
         </Flex>
       ))}
     </VStack>

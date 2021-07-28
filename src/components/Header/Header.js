@@ -67,9 +67,14 @@ const Header = (props) => {
           <Divider orientation="vertical" size="1" color="white" />
         </Center>
         <Link to={JournalPage.routeName}>
-          <Heading as="h1" size="lg" letterSpacing={"tighter"} textDecoration={
+          <Heading
+            as="h1"
+            size="lg"
+            letterSpacing={"tighter"}
+            textDecoration={
               pathname === JournalPage.routeName ? "underline" : "none"
-            }>
+            }
+          >
             Journal
           </Heading>
         </Link>

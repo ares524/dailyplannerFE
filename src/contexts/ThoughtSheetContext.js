@@ -58,7 +58,6 @@ export const SheetProvider = (props) => {
 
 export function useSheet() {
   const context = useContext(SheetContext);
-  console.log(context);
   if (!context) throw new Error("Please use useSheet within SheetProvider");
   const [updateSheet] = useMutation(updateSheetMutation);
   const [createThoughtItem] = useMutation(createThoughtItemMutation);
@@ -104,7 +103,6 @@ export function useSheet() {
 
   const handleCreateThoughtItem = async ({ id, type, ...thoughtItem }) => {
     try {
-      // console.log('aa: ', sheet);
       const result = await createThoughtItem({
         variables: {
           id,
