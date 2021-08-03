@@ -293,3 +293,47 @@ export const getAllThoughtsMutation = gql`
     }
   }
 `;
+
+export const addFoodsMutation = gql`
+  mutation (
+    $foodCategory: String!
+    $description: String!
+    $type: String!
+    $day: String!
+    $foodNutrients: [FoodActionInputType]!
+  ) {
+    createFood(
+      foodCategory: $foodCategory
+      description: $description
+      type: $type
+      day: $day
+      foodNutrients: $foodNutrients
+    ) {
+      foodCategory
+      description
+      type
+      day
+      foodNutrients {
+        nutrientName
+        unitName
+        value
+      }
+    }
+  }
+`;
+
+export const deleteFoodMutation = gql`
+  mutation ($id: ID!) {
+    deleteFood(id: $id) {
+      result
+    }
+  }
+`;
+
+export const updateFoodMutation = gql`
+  mutation ($id: ID!) {
+    updateFood(id: $id) {
+      result
+    }
+  }
+`;

@@ -157,6 +157,7 @@ const ThoughtsCard = ({ type, ...props }) => {
       rightIcon={true}
       rightIconClickHandler={launchNewThoughtModal}
       hideSaveBtn={true}
+      flexGrow={1}
     >
       <VStack spacing={editMode ? "4" : ["1", "4"]}>
         <Flex width="100%" alignItems="center">

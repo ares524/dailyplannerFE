@@ -206,3 +206,39 @@ export const journalsQueryStr = `
     }
   }
 `;
+
+export const mealsQuery = gql`
+  query {
+    meals {
+      _id
+      foodCategory
+      description
+      type
+      day
+      completed
+      foodNutrients {
+        nutrientName
+        unitName
+        value
+      }
+    }
+  }
+`;
+
+export const mealsQueryStr = `
+  query {
+    meals {
+      _id
+      foodCategory
+      description
+      type
+      day
+      completed,
+      foodNutrients {
+        nutrientName
+        unitName
+        value
+      }
+    }
+  }
+`;

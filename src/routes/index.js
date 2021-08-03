@@ -8,6 +8,7 @@ import JournalPage from "../pages/JournalPage/JournalPage";
 import RegisterPage from "../pages/RegisterPage/RegisterPage";
 import RedirectPage from "../pages/RedirectPage/RedirectPage";
 import ExpensesPage from "../pages/ExpensesPage/ExpensesPage";
+import MealPage from "../pages/MealPage/MealPage";
 
 class Routes extends Component {
   render() {
@@ -37,6 +38,11 @@ class Routes extends Component {
           <PrivateRoute
             path={ExpensesPage.routeName}
             component={ExpensesPage}
+            userType="user"
+          />
+          <PrivateRoute
+            path={MealPage.routeName}
+            component={MealPage}
             userType="user"
           />
           <PrivateRoute

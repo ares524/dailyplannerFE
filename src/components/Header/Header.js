@@ -14,6 +14,7 @@ import { COLOR_THEME } from "../../util/constants";
 import { useUser } from "../../contexts/UserContext";
 import ExpensesPage from "../../pages/ExpensesPage/ExpensesPage";
 import JournalPage from "../../pages/JournalPage/JournalPage";
+import MealPage from "../../pages/MealPage/MealPage";
 
 const Header = (props) => {
   const { pathname } = useLocation();
@@ -76,6 +77,21 @@ const Header = (props) => {
             }
           >
             Journal
+          </Heading>
+        </Link>
+        <Center height="8" px={["2", "4"]}>
+          <Divider orientation="vertical" size="1" color="white" />
+        </Center>
+        <Link to={MealPage.routeName}>
+          <Heading
+            as="h1"
+            size={["lg"]}
+            letterSpacing={"tighter"}
+            textDecoration={
+              pathname === MealPage.routeName ? "underline" : "none"
+            }
+          >
+            Meal
           </Heading>
         </Link>
       </Flex>
